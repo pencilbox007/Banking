@@ -1,5 +1,8 @@
 package driver;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import entity.User;
@@ -9,33 +12,67 @@ import storage.UserInfoPool;
 
 public class Runner {
 
-	public static void main(String args[])
+	static Scanner sc=new Scanner(System.in);
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	
+	public static void main(String args[]) throws IOException
 	{
-		Scanner sc=new Scanner(System.in);
+		while(true)
+		{
+			System.out.println("======================================Welcome to ANURAG'S BANKING SYSTEM======================================");
+			System.out.print("Type 1 for REGISTRATION or 2 for LOGIN or 3 for EXIT :");
+			int num=sc.nextInt();
+			if(num==1)
+			{
+				Runner.register();
+			}
+			else if(num==2)
+			{
+				Runner.login();
+			}
+			else if(num==3)
+			{
+				System.out.println("THANKS FOR USING");
+				System.exit(0);
+			}
+		}
+	}
+	
+	public static void register() throws IOException
+	{
+		System.out.println("====================REGISTRATION====================");
 		System.out.println("Input the folowing details");
-		System.out.println("USER ID :");
-		String uid=sc.nextLine();
-		System.out.println("NAME :");
-		String name=sc.nextLine();
-		System.out.println("PASSWORD");
-		String password=sc.nextLine();
+		System.out.print("USER ID :");
+		String uid=br.readLine();
+		System.out.print("NAME :");
+		String name=br.readLine();
+		System.out.print("PASSWORD :");
+		String password=br.readLine();
 		
 		RegisterUser user=new RegisterUser();
 		String bankAccNo=user.register(uid, name, password);
+		System.out.println("=============================================");
 		System.out.println("Account is succesfully opened");
 		System.out.println("Bank Account Number : "+bankAccNo);
 		
 		System.out.println("Would you like to login.Type YES or NO");
-		String uinput=sc.next();
-		boolean c=false;
-		if(uinput.equals("YES"))
+		String str=sc.next();
+		if(str.equals("YES"))
 		{
-			System.out.println("Enter your USER ID");
-			String input_uid=sc.next();
-			System.out.println("Enter your password");
-			String input_pswd=sc.next();
-			c=LoginUser.validateUser(input_uid,input_pswd);
+			Runner.login();
 		}
+	}
+	
+	public static void login()
+	{
+		System.out.println("====================LOGIN====================");
+		boolean c=false;
+		System.out.print("USER ID :");
+		String input_uid=sc.next();
+		System.out.print("PASSWORD :");
+		String input_pswd=sc.next();
+		c=LoginUser.validateUser(input_uid,input_pswd);
+		
 		if(c)
 		{
 			System.out.println("Access Granted");
@@ -44,8 +81,5 @@ public class Runner {
 		{
 			System.out.println("Acces Denied");
 		}
-		
-//		User userInfo=UserInfoPool.user;
-//		System.out.println(userInfo.uid);
 	}
 }
