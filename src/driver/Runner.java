@@ -9,6 +9,7 @@ import entity.User;
 import operations.LoginUser;
 import operations.RegisterUser;
 import storage.UserInfoPool;
+import utility.ResponseMessage;
 
 public class Runner {
 
@@ -40,17 +41,26 @@ public class Runner {
 	
 	public static void register() throws IOException
 	{
+		RegisterUser registerUser=new RegisterUser();
+		
 		System.out.println("====================REGISTRATION====================");
 		System.out.println("Input the folowing details");
 		System.out.print("USER ID :");
 		String uid=br.readLine();
+		
+		String responseMsg=registerUser.checkUIDrules(uid);
+		if(!(responseMsg.equals(ResponseMessage.UID_VALID)))
+		{
+			System.out.println("ERROR : "+responseMsg);
+			register();
+		}
+		
 		System.out.print("NAME :");
 		String name=br.readLine();
 		System.out.print("PASSWORD :");
 		String password=br.readLine();
 		
-		RegisterUser user=new RegisterUser();
-		String bankAccNo=user.register(uid, name, password);
+		String bankAccNo=registerUser.register(uid, name, password);
 		System.out.println("=============================================");
 		System.out.println("Account is succesfully opened");
 		System.out.println("Bank Account Number : "+bankAccNo);
@@ -71,6 +81,7 @@ public class Runner {
 		String input_uid=sc.next();
 		System.out.print("PASSWORD :");
 		String input_pswd=sc.next();
+		
 		c=LoginUser.validateUser(input_uid,input_pswd);
 		
 		if(c)
