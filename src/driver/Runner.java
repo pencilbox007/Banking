@@ -52,7 +52,7 @@ public class Runner {
 		if(!(responseMsg.equals(ResponseMessage.UID_VALID)))
 		{
 			System.out.println("ERROR : "+responseMsg);
-			register();
+			return;
 		}
 		
 		System.out.print("NAME :");
@@ -64,7 +64,7 @@ public class Runner {
 		System.out.println("=============================================");
 		System.out.println("Account is succesfully opened");
 		System.out.println("Bank Account Number : "+bankAccNo);
-		
+	
 		System.out.println("Would you like to login.Type YES or NO");
 		String str=sc.next();
 		if(str.equals("YES"))
@@ -90,7 +90,7 @@ public class Runner {
 		}
 		else
 		{
-			System.out.println("Acces Denied");
+			System.out.println("Access Denied");
 		}
 	}
 }
