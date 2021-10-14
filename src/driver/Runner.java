@@ -21,7 +21,7 @@ public class Runner {
 		while(true)
 		{
 			System.out.println("======================================Welcome to ANURAG'S BANKING SYSTEM======================================");
-			System.out.print("Type 1 for REGISTRATION or 2 for LOGIN or 3 for EXIT :");
+			System.out.print("Type 1 for REGISTRATION or 2 for LOGIN or 3 for EXIT or 4 for displaying current number of registered users :");
 			int num=sc.nextInt();
 			if(num==1)
 			{
@@ -35,6 +35,11 @@ public class Runner {
 			{
 				System.out.println("THANKS FOR USING");
 				System.exit(0);
+			}
+			else if(num==4)
+			{
+				UserInfoPool userCount=new UserInfoPool();
+				System.out.println("User Base Size : "+(userCount.getUserCount()));
 			}
 		}
 	}

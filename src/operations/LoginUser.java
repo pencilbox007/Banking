@@ -1,5 +1,7 @@
 package operations;
 
+import java.util.ArrayList;
+
 import entity.User;
 import storage.UserInfoPool;
 
@@ -7,10 +9,17 @@ public class LoginUser {
 	
 	public static boolean validateUser(String uid, String pswd)
 	{
-		User user=UserInfoPool.user;
-		if(uid.equals(user.uid) &&  pswd.equals(user.password))
+		ArrayList<User> userList=UserInfoPool.userList;
+		
+		for(int i=0;i<userList.size();i++)
 		{
-			return true;
+			if(userList.get(i).uid.equals(uid))
+			{
+				if(userList.get(i).password.equals(pswd))
+				{
+					return true;
+				}
+			}
 		}
 		return false;
 	}
