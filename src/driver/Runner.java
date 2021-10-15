@@ -9,7 +9,7 @@ import entity.User;
 import operations.LoginUser;
 import operations.RegisterUser;
 import storage.UserInfoPool;
-import utility.ResponseMessage;
+import utility.Constant;
 
 public class Runner {
 
@@ -54,7 +54,7 @@ public class Runner {
 		String uid=br.readLine();
 		
 		String responseMsg=registerUser.checkUIDrules(uid);
-		if(!(responseMsg.equals(ResponseMessage.UID_VALID)))
+		if(!(responseMsg.equals(Constant.UID_VALID)))
 		{
 			System.out.println("ERROR : "+responseMsg);
 			return;
@@ -83,11 +83,11 @@ public class Runner {
 		System.out.println("====================LOGIN====================");
 		boolean c=false;
 		System.out.print("USER ID :");
-		String input_uid=sc.next();
+		String inputUID=sc.next();
 		System.out.print("PASSWORD :");
-		String input_pswd=sc.next();
+		String inputPSWD=sc.next();
 		
-		c=LoginUser.validateUser(input_uid,input_pswd);
+		c=LoginUser.validateUser(inputUID,inputPSWD,2);
 		
 		if(c)
 		{

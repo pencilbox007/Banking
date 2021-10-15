@@ -7,15 +7,22 @@ import storage.UserInfoPool;
 
 public class LoginUser {
 	
-	public static boolean validateUser(String uid, String pswd)
+	public static boolean validateUser(String passedUID, String passedPSWD,int x)
 	{
 		ArrayList<User> userList=UserInfoPool.userList;
 		
 		for(int i=0;i<userList.size();i++)
 		{
-			if(userList.get(i).uid.equals(uid))
+			String storedUID = userList.get(i).uid;
+			String storedPSWD = userList.get(i).password;
+
+			if(storedUID.equals(passedUID))
 			{
-				if(userList.get(i).password.equals(pswd))
+				if(x==1)
+				{
+					return true;
+				}	
+				if(storedPSWD.equals(passedPSWD))
 				{
 					return true;
 				}

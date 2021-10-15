@@ -1,7 +1,7 @@
 package operations;
 
 import storage.UserInfoPool;
-import utility.ResponseMessage;
+import utility.Constant;
 
 public class RegisterUser {
 
@@ -16,13 +16,18 @@ public class RegisterUser {
 	{
 		if(!(uid.length()>5 && uid.length()<8))
 		{
-			return ResponseMessage.UID_LENGTH_ISSUE;
+			return Constant.UID_LENGTH_ISSUE;
 		}
 		if(uid.contains("_"))
 		{
-			return ResponseMessage.UID_UNDERSCORE_ISSUE;
+			return Constant.UID_UNDERSCORE_ISSUE;
 		}
-		return ResponseMessage.UID_VALID;	
+		if(LoginUser.validateUser(uid, null, 1))
+		{
+			return Constant.UID_AVAILIBILITY_ISSUE;
+		}
+		return Constant.UID_VALID;	
+		
 	}
 	
 }
