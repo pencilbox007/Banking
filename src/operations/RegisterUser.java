@@ -1,7 +1,7 @@
 package operations;
 
 import storage.UserInfoPool;
-import utility.Constant;
+import util.Constant;
 
 public class RegisterUser {
 
@@ -14,7 +14,7 @@ public class RegisterUser {
 	
 	public String checkUIDrules(String uid)
 	{
-		if(!(uid.length()>5 && uid.length()<8))
+		if(!(uid.length()>5 && uid.length()<15))     
 		{
 			return Constant.UID_LENGTH_ISSUE;
 		}

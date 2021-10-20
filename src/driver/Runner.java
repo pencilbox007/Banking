@@ -9,7 +9,7 @@ import entity.User;
 import operations.LoginUser;
 import operations.RegisterUser;
 import storage.UserInfoPool;
-import utility.Constant;
+import util.Constant;
 
 public class Runner {
 
@@ -21,7 +21,7 @@ public class Runner {
 		while(true)
 		{
 			System.out.println("======================================Welcome to ANURAG'S BANKING SYSTEM======================================");
-			System.out.print("Type 1 for REGISTRATION or 2 for LOGIN or 3 for EXIT or 4 for displaying current number of registered users :");
+			System.out.print("Type 1 for REGISTRATION or 2 for LOGIN or 3 for USER COUNT or 4 for EXIT :");
 			int num=sc.nextInt();
 			if(num==1)
 			{
@@ -33,13 +33,21 @@ public class Runner {
 			}
 			else if(num==3)
 			{
-				System.out.println("THANKS FOR USING");
-				System.exit(0);
+				UserInfoPool userCount=new UserInfoPool();
+				System.out.println("User Base Size : "+(userCount.getUserCount()));
 			}
 			else if(num==4)
 			{
-				UserInfoPool userCount=new UserInfoPool();
-				System.out.println("User Base Size : "+(userCount.getUserCount()));
+				System.out.println("THANKS FOR USING");
+				System.exit(0);
+			}
+			else if(num==5)
+			{
+				UserInfoPool.writeFile();
+			}
+			else
+			{
+				System.out.println("Enter a valid option");
 			}
 		}
 	}

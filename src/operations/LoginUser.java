@@ -1,6 +1,7 @@
 package operations;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import entity.User;
 import storage.UserInfoPool;
@@ -9,7 +10,7 @@ public class LoginUser {
 	
 	public static boolean validateUser(String passedUID, String passedPSWD,int x)
 	{
-		ArrayList<User> userList=UserInfoPool.userList;
+		List<User> userList=UserInfoPool.userList;
 		
 		for(int i=0;i<userList.size();i++)
 		{
