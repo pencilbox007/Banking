@@ -1,7 +1,7 @@
 package storage;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -15,11 +15,16 @@ import entity.User;
 import util.Utility;
 
 public class UserInfoPool {
-
+	
+	static String str;
 	public static String filePath="C:\\Users\\Anurag Halder\\eclipse-workspace\\Banking\\src\\files\\UserInfo.txt";
 	public static List<User> userList=new ArrayList<User>();
 	static Gson gson=new Gson();
 	
+	/**
+	 * generating account number using provided details 
+	 * adding the user object to user list
+	 */
 	public String saveUser(String uid, String name, String password)
 	{
 		String bankAccNo=Utility.accNoGenerator(uid,name);
@@ -34,31 +39,53 @@ public class UserInfoPool {
 		return bankAccNo;
 	}
 	
+	/**
+	 * finding user count
+	 */
 	public int getUserCount()
 	{
 		return userList.size();
 	}
 	
+	/**
+	 * converting object to json
+	 */
 	public static String objectToJson()
 	{
 		String json=gson.toJson(userList);
 		return json;
 	}
 	
-	public List<User> jsonToObject(String json)
+	public static List<User> jsonToObject(String json)
 	{
 		Type listType = new TypeToken<List<User>>(){}.getType();
 		return gson.fromJson(json,listType); 
 	}
-	public static void readFile() throws FileNotFoundException
+	
+	public static void readUserDetails() throws IOException
 	{
-		FileReader reader = new FileReader(filePath);
+		String json=UserInfoPool.readFile();
+		userList=UserInfoPool.jsonToObject(json);
 	}
+	
+	public static String readFile() throws IOException
+	{
+		File file=new File(filePath);
+		FileInputStream fis=new FileInputStream(file);
+		byte a[]=new byte[(int)file.length()];
+		fis.read(a);
+		fis.close();
+		
+		str=new String(a,"UTF-8");
+		System.out.println(str);
+		return str;
+	}
+	
 	public static void writeFile() throws IOException
 	{
 		String str=UserInfoPool.objectToJson();
 		FileWriter writer = new FileWriter(filePath);
 		writer.write(str);
 		writer.close();
-	}
+	}	
 }

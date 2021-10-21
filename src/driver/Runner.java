@@ -23,6 +23,9 @@ public class Runner {
 			System.out.println("======================================Welcome to ANURAG'S BANKING SYSTEM======================================");
 			System.out.print("Type 1 for REGISTRATION or 2 for LOGIN or 3 for USER COUNT or 4 for EXIT :");
 			int num=sc.nextInt();
+			
+			UserInfoPool.readUserDetails();
+			
 			if(num==1)
 			{
 				Runner.register();
@@ -39,11 +42,17 @@ public class Runner {
 			else if(num==4)
 			{
 				System.out.println("THANKS FOR USING");
+				System.out.println("Saving USER DETAILS....Please DON'T TURN OFF SYSTEM");
+				UserInfoPool.writeFile();
 				System.exit(0);
 			}
 			else if(num==5)
 			{
 				UserInfoPool.writeFile();
+			}
+			else if(num==6)
+			{
+				UserInfoPool.readFile();
 			}
 			else
 			{
