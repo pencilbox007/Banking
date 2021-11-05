@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,9 @@ public class UserInfoPool {
 	/**
 	 * generating account number using provided details 
 	 * adding the user object to user list
+	 * @throws NoSuchAlgorithmException 
 	 */
-	public String saveUser(String uid, String name, String password)
+	public String saveUser(String uid, String name, String password) 
 	{
 		String bankAccNo=Utility.accNoGenerator(uid,name);
 		User user=new User();
@@ -35,6 +37,7 @@ public class UserInfoPool {
 		user.password=password;
 		
 		userList.add(user);
+		System.out.println(userList);
 		
 		return bankAccNo;
 	}
@@ -52,6 +55,7 @@ public class UserInfoPool {
 	 */
 	public static String objectToJson()
 	{
+		System.out.println("from obj to json"+userList);
 		String json=gson.toJson(userList);
 		return json;
 	}
@@ -77,13 +81,13 @@ public class UserInfoPool {
 		fis.close();
 		
 		str=new String(a,"UTF-8");
-		System.out.println(str);
 		return str;
 	}
 	
 	public static void writeFile() throws IOException
 	{
 		String str=UserInfoPool.objectToJson();
+		System.out.println(str);
 		FileWriter writer = new FileWriter(filePath);
 		writer.write(str);
 		writer.close();
